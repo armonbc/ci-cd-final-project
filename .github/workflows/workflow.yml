@@ -1,0 +1,24 @@
+name: CI workflow
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    container: python:3.9-slim
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        
+      - name: Install dependencies
+        run: |
+          # Upgrade pip
+          python -m pip install --upgrade pip
+          # Install project requirements
+          pip install -r requirements.txt
